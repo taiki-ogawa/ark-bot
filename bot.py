@@ -5,7 +5,7 @@ import requests
 
 # Discord Bot設定
 intents = discord.Intents.default()
-intents.message_content = True   # これを追加
+intents.message_content = True   # メッセージ内容を読めるようにする
 bot = commands.Bot(command_prefix="/", intents=intents)
 
 # 環境変数から取得
@@ -15,8 +15,9 @@ CONOHA_PASSWORD = os.getenv("CONOHA_PASSWORD")
 TENANT_ID = os.getenv("TENANT_ID")
 SERVER_ID = os.getenv("SERVER_ID")
 
+# APIエンドポイント
 IDENTITY_URL = "https://identity.c3j1.conoha.io/v3/auth/tokens"
-COMPUTE_URL = f"https://compute.c3j1.conoha.io/v2.1/servers/{SERVER_ID}/action"
+COMPUTE_URL = f"https://compute.c3j1.conoha.io/v2/{TENANT_ID}/servers/{SERVER_ID}/action"
 
 def get_token():
     payload = {
