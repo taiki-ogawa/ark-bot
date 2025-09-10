@@ -5,7 +5,7 @@ import requests
 
 # Discord Bot設定
 intents = discord.Intents.default()
-intents.message_content = True   # メッセージ内容を読めるようにする
+intents.message_content = True   # メッセージ内容を拾えるようにする
 bot = commands.Bot(command_prefix="/", intents=intents)
 
 # 環境変数から取得
@@ -36,6 +36,7 @@ def get_token():
         }
     }
     r = requests.post(IDENTITY_URL, json=payload)
+    print("Auth response:", r.status_code, r.text)  # デバッグ用ログ
     if r.status_code == 201:
         return r.headers["X-Subject-Token"]
     else:
@@ -45,7 +46,17 @@ def server_action(action):
     token = get_token()
     headers = {"X-Auth-Token": token, "Content-Type": "application/json"}
     payload = {action: None}
+
+    # デバッグログ出力
+    print("Request URL:", COMPUTE_URL)
+    print("Headers:", headers)
+    print("Payload:", payload)
+
     r = requests.post(COMPUTE_URL, headers=headers, json=payload)
+
+    # レスポンスをログに出す
+    print("Response:", r.status_code, r.text)
+
     return r.status_code, r.text
 
 @bot.command()
