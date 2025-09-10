@@ -5,6 +5,7 @@ import requests
 
 # Discord Bot設定
 intents = discord.Intents.default()
+intents.message_content = True   # これを追加
 bot = commands.Bot(command_prefix="/", intents=intents)
 
 # 環境変数から取得
