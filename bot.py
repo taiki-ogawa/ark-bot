@@ -17,7 +17,7 @@ SERVER_ID = os.getenv("SERVER_ID")
 
 # APIエンドポイント
 IDENTITY_URL = "https://identity.c3j1.conoha.io/v3/auth/tokens"
-COMPUTE_URL = f"https://compute.c3j1.conoha.io/v2/{TENANT_ID}/servers/{SERVER_ID}/action"
+COMPUTE_URL = f"https://compute.c3j1.conoha.io/v2.1/servers/{SERVER_ID}/action"
 
 def get_token():
     payload = {
